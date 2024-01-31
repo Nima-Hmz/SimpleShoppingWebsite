@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="inner-page" id="cart-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>سبد خرید</h1>
+                            <p>مدیریت و خرید همزمان چند محصول</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-12 col-lg-9">
+                            <div id="cart-products">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 py-3">
+                                            <div class="pb-3" id="return-to-shop">می‌خواهید محصولات دیگری اضافه کنید؟ <a href="products.html">بازگشت به فروشگاه</a></div>
+                                            <div class="d-none d-md-block">
+                                                <div class="row my-2" id="heading">
+                                                    <div class="col-4">
+                                                        <div>کالا</div>
+                                                    </div>
+                                                    <div class="col-2">
+                                                        <div>قیمت واحد</div>
+                                                    </div>
+                                                    <div class="col-2 pl-4">
+                                                        <div>تعداد</div>
+                                                    </div>
+                                                    <div class="col-2 pr-0">
+                                                        <div class="pr-3">قیمت نهایی</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Order Product Record -->
+                                            {% for item in cart %}
+                                            <div class="row product">
+                                                <div class="col-12 col-md-4">
+                                                    <div class="row">
+                                                        <div class="col-2 col-md-4 pl-0">
+                                                            <img src="{{item.product_img.url}}" alt="">
+                                                        </div>
+                                                        <div class="col-10 col-md-8">
+                                                            <a href="product.html" target="_blank"><div class="title pt-2">{{ item.product }}</div></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-2">
+                                                    <div class="d-md-none font-weight-bold">قیمت</div>
+                                                    <div class="pt-1"><span class="product-encode4365gbf265g43d">{{ item.price }}</span> <span>تومان</span></div>
+                                                </div>
+                                                <div class="col-6 col-md-2 pl-4 pr-0 pr-md-3">
+                                                    <div class="d-md-none font-weight-bold">تعداد</div>
+                                                    <div class="input-group mb-3 order-number">
+                                                        <!-- <div class="input-group-prepend">
+                                                            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                                        </div> -->
+                                                        <input type="text" name="order-number[]" value="{{ item.quantity }}" class="form-control text-center order-number" readonly>
+                                                        <!-- <div class="input-group-prepend">
+                                                            <button class="btn btn-outline-secondary btn-minus" type="button">_</button>
+                                                        </div> -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-2 pr-0">
+                                                    <div class="d-md-none font-weight-bold">قیمت نهایی</div>
+                                                    <div class="pt-1 pr-2 bg-light"><span class="product-total" >{{item.total_price}}</span> <span>تومان</span></div>
+                                                    <a href="{% url 'shop_orders:cart_remove' item.product.id %}" class="product-remove btn-remove-from-basket" data-id="id"><div class="small pl-2"><i class="fa fa-times"></i> حذف</div></a>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            <hr>
+                                            <!-- Order Product Record -->
+                                            <div class="row product">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 mt-2 mt-lg-0 pr-3 pr-lg-0">
+                            <div id="factor">
+                                <div class="container">
+                                    <div class="row py-2">
+                                        <div class="col-6">
+                                            <div>جمع کل فاکتور:</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div><span id="factor-total-encode4365gbf265g43d">{{ cart.get_total_price }}</span> تومان</div>
+                                        </div>
+                                    </div>
+                                    <div class="row py-2 bg-light">
+                                        <div class="col-6">
+                                            <div>جمع تخفیف:</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div><span id="factor-total-discount">0</span> تومان</div>
+                                        </div>
+                                    </div>
+                                    <div class="row py-2" id="total">
+                                        <div class="col-6">
+                                            <div>مبلغ قابل پرداخت:</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div><span id="factor-total">{{cart.get_total_price}}</span> تومان</div>
+                                        </div>
+                                    </div>
+                                    <div class="row py-2">
+                                        <div class="col-12">
+                                            {% if cart.get_total_price and logged_in and info %}
+                                            <a href="{% url 'shop_orders:order_create' %}"><input type="submit" value="ادامه ثبت سفارش" class="btn btn-success w-100"></a>
+                                            {% elif not logged_in  %}
+                                            <h4>لطفا اول وارد حساب کاربری خود شوید</h4>
+                                            {% elif not info %}
+                                            <h4>لطفا اول اطلاعات حساب خود را تکمیل کنید</h4>
+                                            <a href="{% url 'accounts:user_info' %}">تکمیل کردن اطلاعات حساب</a>
+                                            {% else %}
+                                            <h4>لطفا قیمت نهایی را بررسی کنید</h4>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

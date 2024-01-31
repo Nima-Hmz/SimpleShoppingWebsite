@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="inner-page" id="products-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>فروشگاه روبیک مارکت</h1>
+                            <p>{{category.name}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-12 col-lg-3 px-3 px-lg-0">
+                            <!-- Side Panel -->
+                            <div class="accordion filters-container">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            گروه های محصولات
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>محصولات مرتبط:</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Side Panel -->
+                        </div>
+                        <div class="col-12 col-lg-9 px-0 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
+                            <!-- Filters -->
+                            <!-- /Filters -->
+                            <div class="mt-2" id="pager">
+                                <div class="container">
+                                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-md-4">
+                                        <!-- Products -->
+                                        {% for pro in category %}
+                                        <div class="col">
+                                            <!-- Product Box -->
+                                            <div class="encode4326654321vfb">
+                                                <a href="{% url 'home:product_details' pro.slug %}"><div class="image" style="background-image: url('{{pro.image.url}}')"></div></a>
+                                                <div class="details p-3">
+                                                    <div class="category">
+                                                        <a href="products.html">{{pro.category}}</a>
+                                                    </div>
+                                                    <a href="{% url 'home:product_details' pro.slug %}"><h2>{{pro.name}}</h2></a>
+                                                    <div class="encode4365gbf265g43d">{{pro.price}} تومان</div>
+                                                    <div class="rate">
+                                                        <i class="fa fa-star-half-alt"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /Product Box -->
+                                        </div>
+                                        {% endfor %}
+                                        <!-- /Products -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {% if category.has_other_pages %}
+                                        <ul class="pagination">
+                                            {% if category.has_previous %}
+                                            <li class="page-item">
+                                              <a href="?page={{ category.previous_page_number }}" class="page-link">&laquo;</a>
+                                            </li>
+                                            {% else %}
+                                            <li class="page-item disabled">
+                                                <a href="#" class="page-link">&laquo;</a>
+                                            </li>
+                                            {% endif %}
+                                            {% for i in category.paginator.page_range %}
+                                            {% if category.number == i %}
+                                            <li class="page-item active">
+                                              <span class="page-link">
+                                                {{i}}
+                                                <span class="sr-only"></span>
+                                              </span>
+                                            </li>
+                                            {% else %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{i}}</a></li>
+                                            {% endif %}
+                                             {% endfor %}
+                                             {% if category.has_next %}
+                                            <li class="page-item">
+                                              <a class="page-link"  href="?page={{ category.next_page_number }}">&raquo;</a>
+                                            </li>
+                                            {% else %}
+                                            <li class="page-item disabled">
+                                                <a href="#" class="page-link">&raquo;</a>
+                                            </li>
+                                            {% endif %}
+                                          </ul>
+                                          {% endif %}
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

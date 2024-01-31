@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="inner-page" id="profile-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>ناحیه کاربری</h1>
+                            <p>به ناحیه کاربری روبیک مارکت خوش آمدید.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-12 col-lg-3">
+                            <!-- Side Panel -->
+                            <div class="accordion" id="side-panel">
+                                <div class="accordion-item menu-container">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                            <span class="row">
+                                                <span class="col-3 col-sm-2 col-lg-3">
+                                                    <img src="/static/assets/images/user-no-image.jpg" class="rounded-circle">
+                                                </span>
+                                                <span class="col-7 col-sm-8 col-lg-7 pt-0 pt-sm-2 pt-md-3 pt-lg-0 align-self-center">
+                                                    <div id="full-name">{{user_name}}</div>
+                                                    <div class="mt-2" id="email-mobile">{{phone_number}}</div>
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                        <div class="accordion-body">
+                                            <ul>
+                                                <li>
+                                                    <a href="../index.html">
+                                                        <div>
+                                                            <a href="{% url 'accounts:user_logout' %}"><div class="icon d-inline-block"><img src="/static/assets/images/icons/profile-menu/exit.webp" class="pl-2"></div> خروج از حساب</a>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /Side Panel -->
+                        </div>
+                        <div class="col-12 col-lg-9 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">
+                            <!-- New Address Form -->
+                            <div class="custom-container mb-2" id="new-address">
+                                <div class="row pt-2 px-3">
+                                    <div class="col-12"><h1>آدرس کاربر:</h1></div>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 pt-3">
+                                            <div class="row">
+                                                <form method="post">
+                                                <div class="col-12 col-md-4 pl-2">
+                                                    <div class="form-group m-1">
+                                                        <label for="province">استان:</label>
+                                                        <input type="text" name="province" id="province" class="form-control" value="{{province}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-4 pl-2">
+                                                    <div class="form-group m-1">
+                                                        <label for="city">استان:</label>
+                                                        <input type="text" name="city" id="city" class="form-control" value="{{city}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-8 pl-2">
+                                                    <div class="form-group m-1">
+                                                        <label for="full_address">نشانی کامل:</label>
+                                                        <input type="text" name="full_address" id="full_address" class="form-control" value="{{full_address}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-4 pl-2">
+                                                    <div class="form-group m-1">
+                                                        <label for="postal_code">کد پستی:</label>
+                                                        <input type="text" name="postal_code" id="postal_code" class="form-control" value="{{postal_code}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-4 pl-2">
+                                                    <div class="form-group m-1">
+                                                        <label for="receiver">تحویل گیرنده:</label>
+                                                        <input type="text" name="receiver" id="receiver" class="form-control" value="{{receiver}}">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="col-12">
+                                                    <div class="form-group m-1 pb-3">
+                                                        <input type="submit" class="btn btn-primary px-5" value="ذخیره آدرس">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /New Address Form -->
+
+                            <!-- Latest Orders -->
+                            <div class="mt-2 order">
+                                <div class="row pt-2 px-3">
+                                    <div class="col-12"><h2>آخرین سفارش شما:</h2></div>
+                                </div>
+                            </div>
+                            <div class="custom-container mt-2 order">
+                                <div class="row pt-2 px-3">
+                                    <div class="col-12 col-sm-6"><h2></h2></div>
+                                    <div class="col-12 col-sm-6 text-sm-end"><span></span><span>پرداخت شده</span></div>
+                                </div>
+                                <hr>
+                                <div class="container">
+                                    <div class="row py-2">
+                                        <div class="col-12">
+                                            <div>
+                                                <div class="header">
+                                                    <div class="total py-1"><span>مبلغ کل آخرین خرید شما:</span>{{total_price}}</div>
+                                                </div>
+                                                <div class="container products px-0">
+                                                    <div class="row">
+                                                        <!-- Order Record -->
+                                                        {% for i in items %}
+                                                        <span class="col-12 col-sm-6 col-lg-4 col-xl-3 px-1">
+                                                            <a href="../product.html" target="_blank">
+                                                                <div class="encode4326654321vfb">
+                                                                    <div class="image" style="background-image: url('{{i.product.image.url}}')"></div>
+                                                                    <div class="text-center px-1 px-sm-3">
+                                                                        <h2>{{i.product.name}}</h2>
+                                                                        <div class="number">تعداد: {{i.quantity}} </div>
+                                                                        <div class="encode4365gbf265g43d"> قیمت: {{i.product.price}}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </span>
+                                                        {% endfor %}
+                                                        <!-- /Order Record -->
+                                                        <!-- Order Record -->
+                                                        {% if my_order %}
+                                                        <h4>سفارش شما ثبت شد و در حال پیگیری و ارسال است</h4>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Latest Orders -->
+
+                            <!-- User Addresses -->
+                            <!-- /User Addresses -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

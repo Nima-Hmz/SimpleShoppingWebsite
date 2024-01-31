@@ -1,0 +1,346 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<section class="inner-page" id="product-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>{{product.name}}</h1>
+                            <p>{{product.sub_title}}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content">
+                    <div class="row">
+                        <div class="col-12 col-lg-5 px-lg-0">
+                            <div class="swiper-container gallery-top">
+                                <!-- Additional required wrapper -->
+                                <ul class="swiper-wrapper">
+                                    <!-- Slides -->
+                                    <li id="1" class="swiper-slide">
+                                        <a itemprop="contentUrl" data-size="900x710">
+                                            <img src="{{ product.image.url }}" itemprop="thumbnail" alt="{{product.name}}" />
+                                        </a>
+                                    </li>
+                                    {% if product.image1 %}
+                                        <li id="1" class="swiper-slide">
+                                            <a itemprop="contentUrl" data-size="900x710">
+                                                <img src="{{product.image1.url}}" itemprop="thumbnail" alt="گوشی موبایل سامسونگ مدل Galaxy A21s" />
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    {% if product.image2 %}
+                                        <li id="1" class="swiper-slide">
+                                            <a itemprop="contentUrl" data-size="900x710">
+                                                <img src="{{product.image2.url}}" itemprop="thumbnail" alt="گوشی موبایل سامسونگ مدل Galaxy A21s" />
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if product.image3 %}
+                                        <li id="1" class="swiper-slide">
+                                            <a itemprop="contentUrl" data-size="900x710">
+                                                <img src="{{product.image3.url}}" itemprop="thumbnail" alt="گوشی موبایل سامسونگ مدل Galaxy A21s" />
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    
+                                    <!-- /Slides -->
+                                </ul>
+                                <!-- If we need navigation buttons -->
+                                <div title="قبلی" class="swiper-button-prev swiper-button-white"></div>
+                                <div title="بعدی" class="swiper-button-next swiper-button-white"></div>
+                            </div>
+
+                            <!-- Swiper -->
+                            <div class="swiper-container gallery-thumbs">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide" style="background-image:url('{{ product.image.url }}')"></div>
+                                    {% if product.image1 %}
+                                    <div class="swiper-slide" style="background-image:url('{{product.image1.url}}')"></div>
+                                    {% endif %}
+
+                                    {% if product.image2 %}
+                                    <div class="swiper-slide" style="background-image:url('{{product.image2.url}}')"></div>
+                                    {% endif %}
+
+                                    {% if product.image3 %}
+                                    <div class="swiper-slide" style="background-image:url('{{product.image3.url}}')"></div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="pswp__bg"></div>
+                                <div class="pswp__scroll-wrap">
+                                    <div class="pswp__container">
+                                        <div class="pswp__item"></div>
+                                        <div class="pswp__item"></div>
+                                        <div class="pswp__item"></div>
+                                    </div>
+                                    <div class="pswp__ui pswp__ui--hidden">
+                                        <div class="pswp__top-bar">
+                                            <div class="pswp__counter"></div>
+                                            <button class="pswp__button pswp__button--close" title="بستن (Esc)"></button>
+                                            <button class="pswp__button pswp__button--fs" title="تمام صفحه"></button>
+                                            <button class="pswp__button pswp__button--zoom" title="بزرگنمایی"></button>
+                                            <div class="pswp__preloader">
+                                                <div class="pswp__preloader__icn">
+                                                    <div class="pswp__preloader__cut">
+                                                        <div class="pswp__preloader__donut"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="pswp__button pswp__button--arrow--left" title="قبلی"></button>
+                                        <button class="pswp__button pswp__button--arrow--right" title="بعدی"></button>
+                                        <div class="pswp__caption">
+                                            <div class="pswp__caption__center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-7 mt-5 mt-lg-0 pl-lg-0" id="product-intro">
+                            <a href="{% url 'home:product_details' product.slug %}">
+                                <h1>{{product.name}}</h1>
+                            </a>
+                            
+                            <div class="encode4365gbf265g43d-container py-2">
+                                {% if product.offer %}
+                                <span class="pre-encode4365gbf265g43d">{{product.offer_price}}</span>
+                                {% endif %}
+                                <span class="encode4365gbf265g43d">{{ product.price }} <span>تومان</span></span>
+                            </div>
+                            <p>
+                                {{product.title}}
+                            </p>
+                            <hr>
+                            <div class="variables">
+                                <div class="title">گزینه های موجود:</div>
+                                <div class="row">
+                                    
+                                    
+                                    <div class="col-12 col-sm-4 col-lg-3">
+                                        <div class="variable">
+                                            <form action="{% url 'shop_orders:cart_add' product.id %}" method="post">
+                                                <br>
+                                                {{form}}
+                                                <br>
+                                                <input type="submit" value="اضافه به سبد خرید", class="btn btn-success px-4 px-lg-2 px-xl-4 btn-add-to-basket">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cta-container pt-3 pt-md-5">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- <a href="cart.html">
+                                            <div class="btn btn-success px-4 px-lg-2 px-xl-4 btn-add-to-basket"><i class="fa fa-shopping-cart"></i> افزودن به سبد خرید</div>
+                                        </a> -->
+                                        <br class="d-sm-none">
+                                        <div class="btn btn-outline-secondary encode43243d mt-1 mt-sm-0" data-toggle="tooltip" data-placement="top" title="افزودن به علاقه‌مندی"></div>
+                                        <a href="#"><div class="btn btn-outline-secondary encode43bf243d mt-1 mt-sm-0" data-toggle="tooltip" data-placement="top" title="مقایسه"></div></a>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                        <!-- Nav Tabs -->
+                            <div class="col-12">
+                                <div id="product-nav-tabs">
+                                    <div class="row pt-3 px-md-3">
+                                        <div class="col-12">
+                                            <div id="tabs-panel">
+                                                <button class="tab-item tablink px-3 selected" onclick="openTab(event,'html-tab')">نقد و بررسی</button>
+                                                <button class="tab-item tablink px-3" onclick="openTab(event,'details-tab')">جدول مشخصات</button>
+                                                <button class="tab-item tablink px-3" onclick="openTab(event,'comments-tab')">دیدگاه کاربران ({{ comments.count }})</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-12 pt-2 px-0 px-lg-0">
+                                                <!-- HTML Tab -->
+                                                <div id="html-tab" class="tabs-container text-justify p-0 p-md-3">
+                                                    {{product.description | safe}}
+                                                </div>
+                                                <!-- /HTML Tab -->
+
+                                                <!-- Details Tab -->
+                                                <div id="details-tab" class="tabs-container px-0 px-md-3 pb-0 pb-md-3" style="display:none">
+                                                    <!-- Detail Section -->
+                                                    <div class="row">
+                                                        <div class="col-12 my-2">
+                                                            <span class="detail-title"><i class="fa fa-chevron-left small"></i> مشخصات کلی</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2">
+                                                        {{product.product_property | safe}}
+                                                    </div>
+                                                </div>
+                                                <!-- /Details Tab -->
+
+                                                <!-- Comments Tab -->
+                                                <div id="comments-tab" class="tabs-container px-0 px-md-3 pb-0 pb-md-2" style="display:none">
+                                                    <div class="row">
+                                                        <div class="col-12 text-justify" id="comments">
+                                                            <div class="comments-container">
+                                                                <div class="container px-0">
+                                                                    <div class="row">
+                                                                        <div class="col-12 pt-2">
+                                                                            <!-- Show Comments -->
+                                                                            
+                                                                            <div class="comment p-3 my-2">
+                                                                            {% if comments %}
+                                                                            {% for comment in comments %}
+                                                                                <div class="sender-details">
+                                                                                    <div class="row">
+                                                                                        <div class="col-3 col-sm-2 col-md-1 pl-md-0 pl-lg-2 pl-xl-3">
+                                                                                            <img src="{% static 'assets/images/user-no-image.jpg' %}" alt="" class="rounded">
+                                                                                        </div>
+                                                                                        <div class="col-9 col-sm-10 col-md-11 pr-0 pr-md-2 pr-xl-0 pt-0 pt-lg-1">
+                                                                                            <div class="name">{{ comment.nameUser }}</div>
+                                                                                            <div class="date">ارسال شده در {{ comment.jdate }} </div>
+                                                                                        </div>
+                                                                                        <div class="col-12">
+                                                                                            <p>{{ comment.textComment }}</p>                                                                                    
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <br>
+                                                                                
+                                                                                
+                                                                                <!-- Comment Reply -->
+                                                                                <div class="row justify-content-end">
+                                                                                    {% for reply in comment.recomment.all  %}
+                                                                                    <div class="col-11 pt-2 pr-0">
+                                                                                        <div class="comment p-3">
+                                                                                            <div class="sender-details">
+                                                                                                <div class="row">
+                                                                                                    <div class="col-3 col-sm-2 col-md-1 pl-md-0 pl-lg-2 pl-xl-3">
+                                                                                                        <img src="{% static 'assets/images/user-no-image.jpg' %}" alt="" class="rounded">
+                                                                                                    </div>
+                                                                                                    <div class="col-9 col-sm-10 col-md-11 pr-0 pr-md-2 pr-xl-0 pt-0 pt-lg-1">
+                                                                                                        <div class="name"> {{reply.nameStore}} </div>
+                                                                                                        <div class="date">ارسال شده {{reply.jdate}}</div>
+                                                                                                    </div>
+                                                                                                    <div class="col-12">
+                                                                                                        <p>
+                                                                                                            {{reply.replyText}}
+                                                                                                        </p>                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                {% endfor %}
+                                                                                <!-- /Comment Reply -->
+                                                                            </div>
+                                                                            {% endfor %}
+                                                                            {% endif %}
+
+                                                                            <!-- /Show Comments -->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Send Comment Form -->
+                                                            <div class="comments-container">
+                                                                <div class="row pt-4">
+                                                                    <div class="col-12"><h2>دیدگاه خود را ارسال کنید</h2></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-12 py-3">
+                                                                        <form method="post" action="">
+                                                                            {% csrf_token %}
+                                                                            <div id="send-comment-form">
+                                                                                <p>نظر خود را برای این مطلب ارسال کنید.</p>
+                                                                                <div class="row">
+                                                                                    <div class="col-12 px-3 pl-md-1 col-md-6">
+                                                                                        <div class="form-group my-1">
+                                                                                            <input name="Name" type="text" class="form-control" placeholder="* نام شما" required oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید')" oninput="setCustomValidity('')">
+                                                                                        </div>
+                                                                                    </div>
+                                                            
+                                                                                    <div class="col-12">
+                                                                                        <div class="form-group my-1">
+                                                                                            <textarea name="textComment" class="form-control" id="" rows="4" placeholder="متن دیدگاه"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-12">
+                                                                                        <div class="form-group my-1">
+                                                                                            <input type="submit" value="ارسال دیدگاه" class="btn btn-success px-5">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /Send Comment Form -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- /Comments Tab -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Nav Tabs -->
+
+                        <!-- Suggested Products -->
+                        {% if product.more_product.all %}
+                        <div class="col-12 pt-5" id="suggested-products">
+                            <div class="title py-3 text-center">محصولات مرتبط</div>
+                            <div class="owl-carousel products-carousel">
+                                <!-- Product Item -->
+                                {% for mproducts in product.more_product.all %}
+                                <div class="encode4326654321vfb item">
+                                    <a href="{% url 'home:product_details' mproducts.slug %}"><div class="image" style="background-image: url('{{mproducts.image.url}}')"></div></a>
+                                    <div class="details p-3">
+                                        <div class="category">
+                                            <a href="products.html">{{mproducts.category}}</a>
+                                        </div>
+                                        <a href="{% url 'home:product_details' mproducts.slug %}"><h2>{{mproducts.name}}</h2></a>
+                                        <div class="encode4365gbf265g43d">{{mproducts.price}} تومان</div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <!-- /Product Item -->
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- /Suggested Products -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
