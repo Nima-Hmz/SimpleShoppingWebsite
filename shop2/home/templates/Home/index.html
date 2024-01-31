@@ -211,7 +211,7 @@
                 <div class="on-sale-encode4326654321vfb h-100 p-3" data-aos="fade-zoom-in" data-aos-duration="800">
                     <div class="row h-100">
                         <div class="col-12 col-sm-4 col-lg-5">
-                            <a href="{% url 'home:product_details' item.slug %}"><div class="image h-100" style="background-image: url('/static/assets/images/products/p1000.png')"></div></a>
+                            <a href="{% url 'home:product_details' item.slug %}"><div class="image h-100" style="background-image: url('{{item.image.url}}')"></div></a>
                         </div>
                         <div class="col-12 col-sm-8 col-lg-7 py-3">
                             <div class="encode4365gbf2vrf">محصول ویژه امروز</div>
