@@ -10,11 +10,12 @@ from extensions.utils import jalali_converter
 class Order(models.Model):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='orders', verbose_name="مشتری")
     paid = models.BooleanField(default=False, verbose_name="پرداخت شده")
+    closed = models.BooleanField(default=False, verbose_name="تمام شده")
     created = models.DateTimeField(auto_now_add=True, verbose_name="ایجاد شده")
     updated = models.DateTimeField(auto_now=True, verbose_name="به‌روز شده")
 
     class Meta:
-        ordering = ('-created', 'paid')
+        ordering = ('-paid', 'closed', '-created')
         verbose_name = "سفارش"
         verbose_name_plural = "سفارش‌ها"
 

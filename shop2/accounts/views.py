@@ -67,7 +67,7 @@ def user_register(request):
                                 'phone_number':phone,
                                 'email':email,
                                 'username':username_filed,
-                                'password':password
+                                'password':password,
 
                             }
                             messages.success(request, "کد را برای شما از طریق پیامک ارسال کردیم", 'success')
@@ -152,12 +152,12 @@ class UserInfoView(LoginRequiredMixin, View):
 
             customer = Customer.objects.get(user=user1)
             try:
-                orders = Order.objects.filter(user=customer, paid=True)
-                last_order = orders.first()
+                orders = Order.objects.filter(user=customer, paid=True, closed=False).prefetch_related('items')
+                # last_order = orders.first()
                 my_order = True
                 
-                total_price = last_order.get_total_price()
-                items = OrderItem.objects.filter(order=last_order)
+                # total_price = last_order.get_total_price()
+                # items = OrderItem.objects.filter(order=last_order)
 
             except:
                 total_price = 0
@@ -171,10 +171,11 @@ class UserInfoView(LoginRequiredMixin, View):
             'receiver' : customer.receiver,
             'phone_number':customer.phone_number,
             'user_name':user1.username,
-            'total_price':total_price,
-            'items':items,
+            # 'total_price':total_price,
+            # 'items':items,
             'left_cat':Category.objects.filter(left=True),
             'right_cat':Category.objects.filter(left=False),
+            'orders':orders,
             'my_order':my_order
             }
 

@@ -114,51 +114,53 @@
                             <!-- Latest Orders -->
                             <div class="mt-2 order">
                                 <div class="row pt-2 px-3">
-                                    <div class="col-12"><h2>آخرین سفارش شما:</h2></div>
+                                    <div class="col-12"><h2>آخرین سفارشات شما:</h2></div>
                                 </div>
                             </div>
-                            <div class="custom-container mt-2 order">
-                                <div class="row pt-2 px-3">
-                                    <div class="col-12 col-sm-6"><h2></h2></div>
-                                    <div class="col-12 col-sm-6 text-sm-end"><span></span><span>پرداخت شده</span></div>
-                                </div>
-                                <hr>
-                                <div class="container">
-                                    <div class="row py-2">
-                                        <div class="col-12">
-                                            <div>
-                                                <div class="header">
-                                                    <div class="total py-1"><span>مبلغ کل آخرین خرید شما:</span>{{total_price}}</div>
-                                                </div>
-                                                <div class="container products px-0">
-                                                    <div class="row">
-                                                        <!-- Order Record -->
-                                                        {% for i in items %}
-                                                        <span class="col-12 col-sm-6 col-lg-4 col-xl-3 px-1">
-                                                            <a href="../product.html" target="_blank">
-                                                                <div class="encode4326654321vfb">
-                                                                    <div class="image" style="background-image: url('{{i.product.image.url}}')"></div>
-                                                                    <div class="text-center px-1 px-sm-3">
-                                                                        <h2>{{i.product.name}}</h2>
-                                                                        <div class="number">تعداد: {{i.quantity}} </div>
-                                                                        <div class="encode4365gbf265g43d"> قیمت: {{i.product.price}}</div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </span>
-                                                        {% endfor %}
-                                                        <!-- /Order Record -->
-                                                        <!-- Order Record -->
-                                                        {% if my_order %}
-                                                        <h4>سفارش شما ثبت شد و در حال پیگیری و ارسال است</h4>
-                                                        {% endif %}
+                            {% for order in orders %}
+                                <div class="custom-container mt-2 order">
+                                    <div class="row pt-2 px-3">
+                                        <div class="col-12 col-sm-6"><h2></h2></div>
+                                        <div class="col-12 col-sm-6 text-sm-end"><span></span><span>پرداخت شده - {{order.jcreated}}</span></div>
+                                    </div>
+                                    <hr>
+                                    <div class="container">
+                                        <div class="row py-2">
+                                            <div class="col-12">
+                                                <div>
+                                                    <div class="header">
+                                                        <div class="total py-1"><span>مبلغ کل خرید شما:</span>{{order.get_total_price}}</div>
+                                                    </div>
+                                                    <div class="container products px-0">
+                                                        <div class="row">
+                                                            <!-- Order Record -->
+                                                            {% for item in order.items.all %}
+                                                                <span class="col-12 col-sm-6 col-lg-4 col-xl-3 px-1">
+                                                                    <a href="{% url 'home:product_details' item.product.slug %}" target="_blank">
+                                                                        <div class="encode4326654321vfb">
+                                                                            <div class="image" style="background-image: url('{{item.product.image.url}}')"></div>
+                                                                            <div class="text-center px-1 px-sm-3">
+                                                                                <h2>{{item.product.name}}</h2>
+                                                                                <div class="number">تعداد: {{item.quantity}} </div>
+                                                                                <div class="encode4365gbf265g43d"> قیمت: {{item.product.price}}</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
+                                                                </span>
+                                                            {% endfor %}
+                                                            <!-- /Order Record -->
+                                                            <!-- Order Record -->
+                                                            {% if my_order %}
+                                                            <h4>سفارش شما ثبت شد و در حال پیگیری و ارسال است</h4>
+                                                            {% endif %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% endfor %}
                             <!-- Latest Orders -->
 
                             <!-- User Addresses -->
