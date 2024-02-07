@@ -4,8 +4,8 @@ from .models import Ticket
 
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ['user' , 'status']
-    readonly_fields = ['user']
+    list_display = ['user' , 'title' , 'text' , 'status']
+    readonly_fields = ['user', 'title' , 'text']
     list_editable = ['status']
     list_filter   = ['status']
 

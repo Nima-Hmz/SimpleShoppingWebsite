@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+
+<body>
+<section class="inner-page" id="contact-page">
+    <div class="container-fluid" id="page-hero">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 px-0">
+                            <h1>ثبت فروشنده</h1>
+                            <p> جهت درخواست ثبت موارد زیر را کامل کنید: </p>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">صفحه نخست</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">تماس با ما</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="content p-0 p-sm-3">
+                    <div class="row">
+                        
+                        <div class="col-12 col-lg-7 p-4">
+                            
+                            <p>اطلاعات کاربری شما به همراه موارد زیر برای ما ارسال و بررسی خواهد شد.</p>
+                            <form method="post">
+                                <div class="form-group">
+                                    <label for="subject">موضوع درخواست :</label>
+                                    <input name="title" type="text" class="form-control" id="subject">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">متن درخواست :</label>
+                                    <textarea name="text" class="form-control" id="message" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <input  type="submit" value="ارسال درخواست" class="btn btn-success">
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

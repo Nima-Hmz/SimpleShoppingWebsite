@@ -335,22 +335,29 @@ class ForgotPasswordNewView(View):
 
 class TicketView(LoginRequiredMixin , View):
     def get(self , request):
+        return render(request , 'accounts/add-store.html')
+    
+    def post(self , request):
         user = request.user
         username = Customer.objects.get(user__username=user)
         tickets = Ticket.objects.filter(user__user__username=user)
+        title = request.POST['title']
+        text = request.POST['text']
+
 
         if tickets :
             messages.error(request , 'شما قبلا یک درخواست ارسال کردید' , 'danger')
-            return redirect('accounts:user_info')
+            return redirect('accounts:add_store')
         else:
-            ticket = Ticket(user=username)
-            ticket.save()
-            ticket._meta.verbose_name_plural = " درخواست ثبت * "
-            messages.success(request , 'درخواست با موفقیت ثبت شد' , 'success')
-            return redirect('accounts:user_info')
-        
-    def post(self , request):
-        return redirect('accounts:user_info')
+            if title and text:
+                ticket = Ticket(user=username , title=title , text=text)
+                ticket.save()
+                ticket._meta.verbose_name_plural = " درخواست ثبت * "
+                messages.success(request , 'درخواست با موفقیت ثبت شد' , 'success')
+                return redirect('accounts:add_store')
+            else:
+                messages.error(request , 'پر کردن فیلد ها اجباری است' , 'danger')
+                return redirect('accounts:add_store')
 
 
         
