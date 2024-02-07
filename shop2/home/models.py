@@ -1,7 +1,8 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from extensions.utils import jalali_converter
-
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name="نام")
@@ -20,7 +21,7 @@ class Category(models.Model):
     
 
 class Product(models.Model):
-
+    storeuser = models.ForeignKey(User , on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name="دسته‌بندی")
     name = models.CharField(max_length=200, verbose_name="نام")
     slug = models.SlugField(max_length=200, unique=True, verbose_name="آدرس")

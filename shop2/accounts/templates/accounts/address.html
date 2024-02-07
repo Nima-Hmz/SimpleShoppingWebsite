@@ -49,11 +49,29 @@
                                                         </div>
                                                     </a>
                                                 </li>
+                                                {% if request.user.is_staff %}
+                                                <li>
+                                                    <a href="../index.html">
+                                                        <div>
+                                                            <a href="{% url 'admin:index' %}"><div class="icon d-inline-block"><img src="/static/assets/images/icons/profile-menu/profile.webp" class="pl-2"></div> پنل ادمین </a>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                {% else %}
+                                                <li>
+                                                    <a href="../index.html">
+                                                        <div>
+                                                            <a href="{% url 'accounts:add_store' %}"><div class="icon d-inline-block"><img src="/static/assets/images/icons/profile-menu/store.png" class="pl-2"></div> ارسال درخواست برای فروشندگی </a>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                {% endif %}
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                             <!-- /Side Panel -->
                         </div>
                         <div class="col-12 col-lg-9 pl-lg-0 pr-lg-2 mt-2 mt-lg-0">

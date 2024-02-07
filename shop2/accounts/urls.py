@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import user_login, user_logout, UserRegisterVertifyCode, user_register, UserInfoView, ForgotPasswordView, ForgotPasswordVertifyView, ForgotPasswordNewView
+from .views import *
 
 app_name = "accounts"
 
@@ -13,5 +13,6 @@ urlpatterns = [
     path("forgot_password/", ForgotPasswordView.as_view(), name="forgot_password"),
     path("forgot_password/vertify/", ForgotPasswordVertifyView.as_view(), name="forgot_password_vertify"),
     path("forgot_password/new_password/", ForgotPasswordNewView.as_view(), name="new_password"),
+    path("add_store", TicketView.as_view(), name="add_store"),
 
 ]

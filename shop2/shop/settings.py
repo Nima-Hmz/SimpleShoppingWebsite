@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'shop_orders.apps.ShopOrdersConfig',
     'comment.apps.CommentConfig',
+    'ticket.apps.TicketConfig',
     'ckeditor'
 
 ]

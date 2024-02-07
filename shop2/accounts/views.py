@@ -11,6 +11,9 @@ import datetime as my_datetime
 from django.utils import timezone
 from shop_orders.models import Order, OrderItem
 from home.models import Category
+from ticket.models import Ticket
+
+
 
 # Create your views here.
 
@@ -330,7 +333,24 @@ class ForgotPasswordNewView(View):
             return redirect("home:index")
 
 
+class TicketView(LoginRequiredMixin , View):
+    def get(self , request):
+        user = request.user
+        username = Customer.objects.get(user__username=user)
+        tickets = Ticket.objects.filter(user__user__username=user)
 
+        if tickets :
+            messages.error(request , 'شما قبلا یک درخواست ارسال کردید' , 'danger')
+            return redirect('accounts:user_info')
+        else:
+            ticket = Ticket(user=username)
+            ticket.save()
+            ticket._meta.verbose_name_plural = " درخواست ثبت * "
+            messages.success(request , 'درخواست با موفقیت ثبت شد' , 'success')
+            return redirect('accounts:user_info')
+        
+    def post(self , request):
+        return redirect('accounts:user_info')
 
 
         
