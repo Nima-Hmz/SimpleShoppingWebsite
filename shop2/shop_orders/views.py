@@ -57,7 +57,7 @@ class CartAddView(View):
                 messages.error(request, "موجودی این کالا در انبار تمام شده است", 'danger')
                 return redirect("home:index")
 
-        return redirect("shop_orders:cart") 
+        return redirect("home:product_details", slug=product.slug) 
 
 
 class CartRemoveView(View):
@@ -156,7 +156,7 @@ class OrderPayView(LoginRequiredMixin, View):
                     return redirect(url)
                 else:
                     messages.error(request, "مشکل در اتصال به درگاه پرداخت", 'danger')
-                    return {'status': False, 'code': str(response['Status'])}
+                    return redirect("home:index")
                 
             messages.error(request, "مشکل در اتصال به درگاه پرداخت", 'danger')
             return redirect("home:index")
