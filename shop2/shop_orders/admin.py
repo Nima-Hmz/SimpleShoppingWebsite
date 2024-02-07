@@ -24,3 +24,11 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = (OrderItemInLine,)
 
 
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            return super().get_queryset(request)
+        return super().get_queryset(request).filter(items__product__storeuser=request.user)
+       
+    def save_model(self, request, obj, form, change):
+        obj.items.product.storeuser = request.user
+        super().save_model(request, obj, form, change)
