@@ -23,8 +23,8 @@ class Comment(models.Model):
         verbose_name_plural = 'نظرات'
 
 class ReplyComment(models.Model):
-    comment   = models.ForeignKey(Comment , on_delete=models.CASCADE , related_name='recomment' , verbose_name='برای نظر :')
-    nameStore = models.CharField(max_length=200 , default="فروشگاه" , verbose_name='نام پاسخ دهنده')
+    comment   = models.ForeignKey(Comment , on_delete=models.CASCADE , related_name='recomment' , verbose_name='برای نظر')
+    nameStore = models.CharField(max_length=200 , blank=True , verbose_name='نام پاسخ دهنده')
     replyText = models.TextField(verbose_name='متن جواب')
     dateTime    = models.DateTimeField(default=timezone.now)
     isActive    = models.BooleanField(default=True)

@@ -12,7 +12,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ["name", "category", "slug", "jcreated", "position", "quantity", "available"]
     search_fields = ["name", "slug"]
     list_filter = ["available"]
-    exclude = ('storeuser',)
+    #exclude = ('storeuser',)
+    readonly_fields = ('storeuser',)
 
     def get_queryset(self, request):
         if request.user.is_superuser:

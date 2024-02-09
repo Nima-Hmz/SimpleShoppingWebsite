@@ -21,7 +21,7 @@ class Category(models.Model):
     
 
 class Product(models.Model):
-    storeuser = models.ForeignKey(User , on_delete=models.CASCADE)
+    storeuser = models.ForeignKey(User , on_delete=models.CASCADE , verbose_name='فروشگاه')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name="دسته‌بندی")
     name = models.CharField(max_length=200, verbose_name="نام")
     slug = models.SlugField(max_length=200, unique=True, verbose_name="آدرس")
@@ -43,7 +43,7 @@ class Product(models.Model):
     sell_star = models.BooleanField(default=False, verbose_name="پر‌بازدید‌ترین")
     best_day = models.BooleanField(default=False, verbose_name="محصول ویژه امروز")
     best = models.BooleanField(default=False, verbose_name="فروش ویژه")
-    more_product = models.ManyToManyField("self" , blank=True , null=True)
+    more_product = models.ManyToManyField("self" , blank=True , null=True , verbose_name='محصولات مرتبط')
 
 
 
