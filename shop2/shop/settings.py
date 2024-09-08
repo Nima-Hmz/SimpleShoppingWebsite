@@ -148,7 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #SANDBOX MODE
 
-MERCHANT = "6dd944ee-3913-4d58-8b49-b430c57d995c"
+MERCHANT = False
 
 SANDBOX = True
 
