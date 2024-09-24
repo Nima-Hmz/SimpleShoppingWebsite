@@ -8,19 +8,12 @@ It includes user authentication, product categories, and a streamlined checkout 
 
 ## Features
 - Marketplace model: Multiple vendors can request to list their products.
-<br>
 - Product request system: Vendors can submit products via a shopping request form.
-<br>
 - User authentication: Secure login system for users.
-<br>
 - Product categories: Organized for easier navigation.
-<br>
 - Shopping cart functionality: Users can add products and manage their cart.
-<br>
 - Streamlined checkout process: Simplified process for completing purchases.
-<br>
 - Django-powered: Built using Django, following a clean and modular design.
-<br>
 - User-friendly interface: Customers can easily browse and purchase products from various vendors.
 
 ## Installation
