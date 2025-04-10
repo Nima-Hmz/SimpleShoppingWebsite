@@ -24,7 +24,7 @@ It includes user authentication, product categories, and a streamlined checkout 
   ```python3 -m pip install -r requirments.txt```
 
 ## Usage
-To run the donation platform on a localhost, follow these steps:
+To run the shopping platform on a localhost, follow these steps:
 <br>
 1) Navigate to the donate directory:
 ```cd shop2```
